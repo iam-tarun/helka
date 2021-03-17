@@ -4,7 +4,8 @@
   "description": "news finder app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/iam-tarun/helka/issues"
   },
-  "homepage": "https://github.com/iam-tarun/helka#readme"
+  "homepage": "https://github.com/iam-tarun/helka#readme",
+  "dependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
