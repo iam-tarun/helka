@@ -1,4 +1,7 @@
 import React from 'react'
+import {Grid} from '@material-ui/core'
+import SideNav from './SideNav'
+import TopNav from './TopNav'
 
 const Dashboard = ({history}) => {
     
@@ -15,10 +18,14 @@ const Dashboard = ({history}) => {
     }
 
     return (
-        <div>
-            hi
-            <button onClick={handleLogout} >Logout</button>
-        </div>
+        <Grid container direction="row" spacing={2}>
+            <Grid item xs={2}>
+                <SideNav />
+            </Grid>
+            <Grid item xs={10}>
+                <TopNav log={handleLogout} />
+            </Grid>        
+        </Grid>
     )
 }
 
