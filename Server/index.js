@@ -6,6 +6,7 @@ const cors = require('cors')
 
 const AuthRoutes = require('./routes/auth')
 const DashboardRoutes = require('./routes/dashboard')
+const NewsRoutes = require('./routes/news')
 
 ConnectDB()
 
@@ -16,7 +17,7 @@ app.use(cors())
 
 app.use("/api/auth/", AuthRoutes)
 app.use("/api/dashboard", DashboardRoutes)
-
+app.use("/api/news/", NewsRoutes)
 
 app.use(errorHandler)
 

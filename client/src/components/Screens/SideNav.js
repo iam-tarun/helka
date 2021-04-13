@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const SideNav = () => {
+const SideNav = ({username}) => {
 
     const classes = useStyles()
 
@@ -23,7 +23,7 @@ const SideNav = () => {
             <Grid container alignItems="center" justify="center" direction="column" spacing={4}>
                 <Grid className={classes.profile} item xs={12}>
                     <Avatar className={classes.avatar} alt="profile pic" />
-                    <Typography>Username</Typography>
+                    <Typography>{username}</Typography>
                 </Grid>
                 <Grid item xs={12} ></Grid>
                 <Grid item xs={12} ></Grid>

@@ -8,8 +8,8 @@ const TopNav = ({log}) => {
             <Grid item xs={2}>
                <Grid container direction="row-reverse">
                    <Grid item xs={4}>
-                   <IconButton>
-                       <ExitToAppOutlined onClick={log} />
+                   <IconButton onClick={log} >
+                       <ExitToAppOutlined  />
                     </IconButton>
                    </Grid>
                    <Grid item xs={4}>
