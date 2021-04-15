@@ -6,11 +6,12 @@ import Landing from './components/Screens/Landing';
 import Login from './components/Screens/Login';
 import Register from './components/Screens/Register';
 // import Bookmarks from './components/Screens/Bookmarks';
+// import './app.css'
 
 function App() {
   return (
     <Router>
-      <div>
+      <div >
         <Switch>
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <Route exact path="/login" component={Login} />

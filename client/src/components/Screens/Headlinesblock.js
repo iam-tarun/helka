@@ -1,30 +1,26 @@
 import React from "react";
 import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   Grid,
   Typography,
-  makeStyles,
-  CardActions,
   Button,
   MenuItem,
   TextField,
+  createMuiTheme,
+  MuiThemeProvider
 } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
 import { changeHeadlines } from "../../redux/actions/headlinseActions";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import Article from "./Article";
 
-const useStyles = makeStyles((theme) => ({
-  media: {
-    height: "180px",
-  },
-  card: {
-    minHeight: "400px",
-  },
-}));
+const theme = createMuiTheme({
+  palette:{
+    primary : {
+      main:"#000000",
+    }
+  }
+})
+
 
 const categories = [
   {
@@ -277,9 +273,8 @@ const countries = [
 ];
 
 const Headlinesblock = ({ Headlines }) => {
-  const classes = useStyles();
 
-  const [pageNumber, setPageNumber] = React.useState(0);
+  const [pageNumber, setPageNumber] = React.useState(1);
   const headlinesPerPage = 3;
   const pagesVisited = pageNumber * headlinesPerPage;
 
@@ -294,37 +289,7 @@ const Headlinesblock = ({ Headlines }) => {
     Headlines.headlines
       .slice(pagesVisited, pagesVisited + headlinesPerPage)
       .map((headline, index) => (
-        <Grid item xs={4} key={index} className={classes.card}>
-          <Card className={classes.card}>
-            <CardActionArea>
-              <Link
-                style={{ textDecoration: "None", color: "black" }}
-                to={{ pathname: "/dashboard/headline", state: headline }}
-              >
-                <CardMedia
-                  component="img"
-                  className={classes.media}
-                  src={headline.urlToImage}
-                  title={headline.title}
-                />
-                <CardContent>
-                  <Typography component="p">{headline.title}</Typography>
-                </CardContent>
-              </Link>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small">share</Button>
-              <a
-                href={headline.url}
-                style={{ textDecoration: "None" }}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Button size="small">go to website</Button>
-              </a>
-            </CardActions>
-          </Card>
-        </Grid>
+        <Article article={headline} key={index} />
       ))
   );
 
@@ -348,14 +313,16 @@ const Headlinesblock = ({ Headlines }) => {
   };
 
   const pageCount = Math.ceil(
-    Headlines.loading ? 0 : Headlines.headlines.length / headlinesPerPage
+    Headlines.loading ? 0 : Headlines.error ? 0 : Headlines.headlines.length / headlinesPerPage -1
   );
   const changePage = (event, value) => {
     console.log(value);
     setPageNumber(value);
   };
   return (
-    <Grid container alignItems="center" justify="center" spacing={2}>
+
+    <MuiThemeProvider theme={theme} >
+      <Grid container alignItems="center" justify="center" spacing={2} style={{marginTop:20, marginLeft:10, marginRight:10, marginBottom:20}} >
       <Grid item xs={6}>
         <Typography variant="h3">Headlines</Typography>
       </Grid>
@@ -397,13 +364,13 @@ const Headlinesblock = ({ Headlines }) => {
       {displayHeadlines}
       <Grid item xs={12}>
         <Pagination
-          variant="outlined"
-          shape="rounded"
           count={pageCount}
           onChange={changePage}
+          color='primary'
         />
       </Grid>
     </Grid>
+    </MuiThemeProvider>
   );
 };
 

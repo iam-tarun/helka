@@ -57,3 +57,23 @@ exports.channels = async (req, res, next) => {
     }
 
 }
+
+exports.search = async (req, res, next) => {
+    const newsapi = new NewsAPI(process.env.NEWSAPI_KEY);
+    const {q} = req.body;
+    try {
+        const response = await newsapi.v2.everything({
+            q,
+            language: 'en',
+            page:2
+        })
+
+        return res.status(200).json({
+            success: true,
+            data: response.articles
+        })
+    }
+    catch (error) {
+        next(error)
+    }
+}
