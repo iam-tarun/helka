@@ -5,8 +5,13 @@ import TopNav from './TopNav'
 import {useSelector, useDispatch} from 'react-redux'
 import {getUser} from '../../redux/actions/userActions'
 import {getHeadlines} from '../../redux/actions/headlinseActions'
+import {getChannels} from '../../redux/actions/sourcesActions'
 import Headlinesblock from './Headlinesblock'
-
+import {Switch, Route } from 'react-router-dom'
+import Bookmarks from './Bookmarks'
+import Space from './Space'
+import Headline from './Headline'
+import Channels from './Channels'
 
 
 const Dashboard = ({history}) => {
@@ -15,21 +20,25 @@ const Dashboard = ({history}) => {
     const User = useSelector((state) => state.user);
     const Headlines = useSelector((state) => state.headlines);
 
-   
+    if(!localStorage.getItem("authToken")){
+        history.push("/login")
+    }
 
     React.useEffect(() => {
-        dispatch(getUser())
-        dispatch(getHeadlines())
         if(!localStorage.getItem("authToken")){
             history.push("/login")
         }
+        dispatch(getUser())
+        dispatch(getHeadlines())
+        dispatch(getChannels())
     }, [dispatch, history])
 
     const handleLogout = () => {
         localStorage.removeItem("authToken")
         history.push("/login")
     }
-    console.log(User)
+    
+
     return (
         <Grid container direction="row" spacing={2}>
             <Grid item xs={2}>
@@ -43,9 +52,15 @@ const Dashboard = ({history}) => {
                     <Grid item xs={12}>
                     <TopNav log={handleLogout} />
                     </Grid>
-                  
                     <Grid item xs={12}>
-                        <Headlinesblock Headlines={Headlines} />
+                            <Switch>
+                                <Route path="/dashboard/bookmarks" exact component={Bookmarks} />
+                                <Route path="/dashboard/space" exact component={Space} /> 
+                                <Route path="/dashboard/headline" exact component={Headline} />
+                                <Route path="/dashboard/channels" exact component={Channels} />
+                                <Route path="/dashboard" ><Headlinesblock Headlines={Headlines} /></Route>
+                                
+                            </Switch>
                     </Grid>
                 </Grid>
             </Grid>        

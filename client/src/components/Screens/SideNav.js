@@ -1,7 +1,9 @@
-import { Avatar, Paper, Grid, makeStyles, Typography, List, ListItemIcon, ListItemText, ListItem, Divider} from '@material-ui/core'
+import { Avatar, Paper, Grid, makeStyles, Typography, List, ListItemIcon, ListItemText, ListItem} from '@material-ui/core'
 import React from 'react'
 import {BookmarkBorderOutlined, HistoryOutlined, SpaceBarOutlined, LiveTvOutlined} from '@material-ui/icons'
 import Clock from 'react-live-clock'
+import {NavLink} from 'react-router-dom'
+import * as BsIcons from 'react-icons/bs'
 
 const useStyles = makeStyles((theme) => ({
     avatar: {
@@ -11,6 +13,10 @@ const useStyles = makeStyles((theme) => ({
     },
     profile: {
         textAlign: "center",
+    },
+    link : {
+        textDecoration: 'None',
+        color: 'black',
     },
 }))
 
@@ -26,38 +32,49 @@ const SideNav = ({username}) => {
                     <Typography>{username}</Typography>
                 </Grid>
                 <Grid item xs={12} ></Grid>
-                <Grid item xs={12} ></Grid>
-                <Grid item xs={12} ></Grid>
                     <List component="nav" >
-                        <Divider />
-                        <ListItem button>
-                            <ListItemIcon>
-                                <BookmarkBorderOutlined />
-                            </ListItemIcon>
-                            <ListItemText primary="Bookmarks" />
-                        </ListItem>
-                        <Divider />
+                        
+                            <NavLink exact to="/dashboard" className={classes.link} >
+                                <ListItem button >
+                                <ListItemIcon>
+                                    < BsIcons.BsNewspaper />
+                                </ListItemIcon>
+                                <ListItemText primary="Headlines" />
+                                </ListItem>
+                            </NavLink>
+                        
+                            <NavLink exact to="/dashboard/bookmarks" className={classes.link} >
+                            <ListItem button  >
+                                <ListItemIcon>
+                                    <BookmarkBorderOutlined />
+                                </ListItemIcon>
+                                <ListItemText primary="Bookmarks" />
+                            </ListItem>
+                            </NavLink> 
+                        
+                        <NavLink to="/dashboard/space" className={classes.link} >
                         <ListItem button>
                             <ListItemIcon>
                                 <SpaceBarOutlined />
                             </ListItemIcon>
                             <ListItemText primary="Space" />
                         </ListItem>
-                        <Divider />
+                        </NavLink>
+                        <NavLink to="/dashboard/channels" className={classes.link} >
                         <ListItem button>
                             <ListItemIcon>
                                 <LiveTvOutlined />
                             </ListItemIcon>
                             <ListItemText primary="Channels" />
                         </ListItem>
-                        <Divider />
+                        </NavLink>
                         <ListItem button>
                             <ListItemIcon>
                                 <HistoryOutlined />
                             </ListItemIcon>
                             <ListItemText primary="History" />
                         </ListItem>
-                        <Divider />
+                
                     </List>
                     <Grid item xs={12}></Grid>
                     <Grid item xs={12}></Grid>
