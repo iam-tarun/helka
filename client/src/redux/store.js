@@ -5,12 +5,14 @@ import {getUser} from './reducers/userReducer'
 import {getHeadlines} from './reducers/headlinesReducer'
 import {sourceReducer} from './reducers/sourceReducer'
 import {searchResults} from './reducers/searchReducer'
+import {bookmarks} from './reducers/bookmarksReducer'
 
 const reducer = combineReducers({
     user: getUser,
     headlines: getHeadlines,
     sources: sourceReducer,
     results: searchResults,
+    bookmarks
 })
 
 const middleware = [thunk]

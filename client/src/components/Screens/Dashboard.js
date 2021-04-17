@@ -14,6 +14,7 @@ import Headline from "./Headline";
 import Channels from "./Channels";
 import Search from './Search';
 import './dashboard.css'
+import { getBookmarks } from "../../redux/actions/bookmarkActions";
 
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Dashboard = ({ history }) => {
     dispatch(getUser());
     dispatch(getHeadlines());
     dispatch(getChannels());
+    dispatch(getBookmarks());
   }, [dispatch, history]);
 
   const handleLogout = () => {

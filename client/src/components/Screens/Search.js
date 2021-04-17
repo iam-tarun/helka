@@ -33,7 +33,7 @@ const Search = () => {
   ) : (
     results
       .slice(pagesVisited, pagesVisited + resultsPerPage)
-      .map((result, index) => <Article article={result} />)
+      .map((result, index) => <Article article={result} key={index} />)
   );
 
   const pageCount = Math.ceil(
@@ -41,7 +41,6 @@ const Search = () => {
   );
 
   const changePage = (event, value) => {
-    console.log(value);
     setPageNumber(value);
   };
 
