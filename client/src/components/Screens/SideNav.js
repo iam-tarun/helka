@@ -75,9 +75,9 @@ const SideNav = ({ username }) => {
             </ListItem>
           </NavLink>
 
-          <NavLink to="/dashboard/space" className={classes.link} activeClassName={classes.activeItem} >
+          <NavLink to="/dashboard/profile" className={classes.link} activeClassName={classes.activeItem} >
             <ListItem button>
-              <ListItemText primary="Space" />
+              <ListItemText primary="Profile" />
             </ListItem>
           </NavLink>
           <NavLink to="/dashboard/channels" className={classes.link} activeClassName={classes.activeItem} >

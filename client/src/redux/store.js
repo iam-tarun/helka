@@ -6,12 +6,14 @@ import {getHeadlines} from './reducers/headlinesReducer'
 import {sourceReducer} from './reducers/sourceReducer'
 import {searchResults} from './reducers/searchReducer'
 import {bookmarks} from './reducers/bookmarksReducer'
+import {profileReducer} from './reducers/profileReducer'
 
 const reducer = combineReducers({
     user: getUser,
     headlines: getHeadlines,
     sources: sourceReducer,
     results: searchResults,
+    profile: profileReducer,
     bookmarks
 })
 

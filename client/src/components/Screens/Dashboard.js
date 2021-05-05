@@ -6,16 +6,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../redux/actions/userActions";
 import { getHeadlines } from "../../redux/actions/headlinseActions";
 import { getChannels } from "../../redux/actions/sourcesActions";
+import {getProfile} from '../../redux/actions/profileActions'
 import Headlinesblock from "./Headlinesblock";
 import { Switch, Route } from "react-router-dom";
 import Bookmarks from "./Bookmarks";
-import Space from "./Space";
 import Headline from "./Headline";
 import Channels from "./Channels";
 import Search from './Search';
 import './dashboard.css'
 import { getBookmarks } from "../../redux/actions/bookmarkActions";
 import Bookmark from "./Bookmark";
+import Profile from "./Profile"
 
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const Dashboard = ({ history }) => {
     dispatch(getHeadlines());
     dispatch(getChannels());
     dispatch(getBookmarks());
+    dispatch(getProfile());
   }, [dispatch, history]);
 
   const handleLogout = () => {
@@ -60,7 +62,7 @@ const Dashboard = ({ history }) => {
             <Switch>
               <Route path="/dashboard/bookmarks" exact component={Bookmarks} />
               <Route path="/dashboard/bookmark" exact component={Bookmark} />
-              <Route path="/dashboard/space" exact component={Space} />
+              <Route path="/dashboard/profile" exact component={Profile} />
               <Route path="/dashboard/headline" exact component={Headline} />
               <Route path="/dashboard/channels" exact component={Channels} />
               <Route path="/dashboard/search" exact component={Search} />

@@ -8,11 +8,12 @@ const AuthRoutes = require('./routes/auth')
 const DashboardRoutes = require('./routes/dashboard')
 const NewsRoutes = require('./routes/news')
 const BookmarkRoutes = require('./routes/bookmarks')
+const profileRoutes = require('./routes/profile')
 
 ConnectDB()
 
 const app = express()
-app.use(express.json())
+app.use(express.json({limit: '25mb'}))
 app.use(cors())
 
 
@@ -20,6 +21,7 @@ app.use("/api/auth/", AuthRoutes)
 app.use("/api/dashboard", DashboardRoutes)
 app.use("/api/news/", NewsRoutes)
 app.use("/api/bookmarks/", BookmarkRoutes)
+app.use("/api/profile/", profileRoutes)
 
 app.use(errorHandler)
 
