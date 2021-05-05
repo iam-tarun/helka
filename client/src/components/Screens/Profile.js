@@ -3,6 +3,7 @@ import * as material from "@material-ui/core"
 import {useSelector, useDispatch} from 'react-redux'
 import FileBase64 from 'react-file-base64'
 import {createProfile, updateProfile} from '../../redux/actions/profileActions'
+import {useHistory} from 'react-router-dom'
 
 const useStyles = material.makeStyles((theme) => ({
     root:{
@@ -12,40 +13,42 @@ const useStyles = material.makeStyles((theme) => ({
 
 const Profile = () => {
     const profile = useSelector(state => state.profile)
-    console.log(profile)
+    const history = useHistory()
     const dispatch = useDispatch()
-    let UserProfile = {}
-    if (profile.profile) {
-        UserProfile = profile.profile
-    }
-    else{
-        UserProfile = {
-            phoneNumber: "",
-            photo:"",
-            desc:"",
-        }
-    }
-    const [image, setImage] = React.useState(UserProfile.photo)
+    const [image, setImage] = React.useState("")
     const classes = useStyles()
-    const [phone, setPhone] = React.useState(UserProfile.photo)
-    const [desc, setDesc] = React.useState(UserProfile.desc)
-
+    const [phone, setPhone] = React.useState("")
+    const [desc, setDesc] = React.useState("")
+    console.log(profile.error)
     const handleProfile = (e) => {
         e.preventDefault()
         if(profile.profile){
-            dispatch(updateProfile({phoneNumber:phone, photo: image, desc}))
+            if(phone === ""){
+                setPhone(profile.profile[0].phoneNumber)
+            }
+            if(image === ""){
+                setImage(profile.profile[0].photo)
+            }
+            if(desc === ""){
+                setDesc(profile.profile[0].desc)
+            }
+            dispatch(updateProfile({phoneNumber:phone, photo: image, desc, id:profile.profile[0]._id}))
+            history.push("/dashboard")
+
         }
         else{
             dispatch(createProfile({phoneNumber:phone, photo:image, desc}))
+            history.push("/dashboard")
         }
     }
 
     return (
         <div className={classes.root} >
-            {profile.error ? <h2>Create your profile!!!</h2> : <h2>Profile</h2> }
+            <material.Typography variant="h5">Profile</material.Typography>
                 <form onSubmit={handleProfile} >
-                <material.Grid container direction="row">
+                <material.Grid container direction="row" alignItems="center">
                 <material.Grid item xs={6}>
+                <material.Grid container spacing={2} direction='column' alignItems="center" >
                     <material.CardMedia 
                         component="img"
                         title="profile"
@@ -57,9 +60,6 @@ const Profile = () => {
                         multiple={false}
                         onDone={({base64}) => setImage(base64)}
                     />
-                </material.Grid>
-                <material.Grid item xs={6}>
-                    <material.Grid container spacing={2} direction='column' >
                         <material.Grid item xs={12}>
                             <material.TextField type="tel" label="phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
                         </material.Grid>
@@ -70,6 +70,24 @@ const Profile = () => {
                             <material.Button type="submit" >Update</material.Button>
                         </material.Grid>
                     </material.Grid>
+                </material.Grid>
+                <material.Grid item xs={6}>
+                    {profile.loading ? <h2>Loading...</h2> : profile.error ? profile.error : profile.profile.length === 0 ? <h2>Loading...</h2>  :  (
+                    <material.Grid container spacing={2} direction="column" alignItems="center" justify="center" style={{textAlign:"center"}}>
+                        <material.CardMedia 
+                            component="img"
+                            title="DP"
+                            src={profile.profile[0].photo}
+                            style={{height:'200px', width:'200px', borderRadius:"50%"}}
+                        />
+                        <material.Grid item xs={12}>
+                            <material.Typography>{profile.profile[0].phoneNumber}</material.Typography>
+                        </material.Grid>
+                        <material.Grid item xs={12}>
+                            <material.Typography>{profile.profile[0].desc}</material.Typography>
+                        </material.Grid>
+                    </material.Grid>
+                    )}
                 </material.Grid>
                 </material.Grid>
                 </form>

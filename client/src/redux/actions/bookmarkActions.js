@@ -45,7 +45,7 @@ export const addBookmark = (article) => async (dispatch) => {
       article,
       config
     );
-
+    console.log(data.data)
     dispatch({
       type: bookmarksTypes.ADD_BOOKMARKS_SUCCESS,
       payload: data.data,

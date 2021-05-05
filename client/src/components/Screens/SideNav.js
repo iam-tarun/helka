@@ -85,9 +85,6 @@ const SideNav = ({ username }) => {
               <ListItemText primary="Channels" />
             </ListItem>
           </NavLink>
-          <ListItem button>
-            <ListItemText primary="History" />
-          </ListItem>
         </List>
         <Grid item xs={12}></Grid>
         <Grid item xs={12}></Grid>

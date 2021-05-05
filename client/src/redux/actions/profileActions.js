@@ -47,6 +47,7 @@ export const updateProfile = (profile) => async (dispatch) => {
     try {
         dispatch({type: profileTypes.UPDATE_PROFILE_REQUEST})
         const {data} = await axios.post("/api/profile/update", profile, config)
+        console.log(data.data)
         dispatch({type: profileTypes.UPDATE_PROFILE_SUCCESS, payload: data.data})
     } catch (error) {
         dispatch({type: profileTypes.UPDATE_PROFILE_FAIL, payload: error.response && error.response.data.message

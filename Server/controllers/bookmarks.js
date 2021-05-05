@@ -35,7 +35,6 @@ exports.getBookmarks = async (req, res, next) => {
 
     try {
         const bookmarks = await Bookmark.find({user:user._id})
-
         res.status(200).json({
             success: true,
             data: bookmarks

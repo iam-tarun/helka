@@ -1,6 +1,6 @@
 import { Grid, IconButton, TextField, Button } from '@material-ui/core'
 import React from 'react'
-import {NotificationsActiveOutlined, ExitToAppOutlined} from '@material-ui/icons'
+import {ExitToAppOutlined} from '@material-ui/icons'
 import {useDispatch} from 'react-redux'
 import {search} from '../../redux/actions/searchActions'
 import {useHistory} from 'react-router-dom'
@@ -24,11 +24,6 @@ const TopNav = ({log}) => {
                    <Grid item xs={4}>
                    <IconButton onClick={log} style={{color:"#99e699"}} >
                        <ExitToAppOutlined  />
-                    </IconButton>
-                   </Grid>
-                   <Grid item xs={4}>
-                   <IconButton style={{color:"#99e699"}} >
-                        <NotificationsActiveOutlined />
                     </IconButton>
                    </Grid>
                </Grid>

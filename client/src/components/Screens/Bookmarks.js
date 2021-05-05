@@ -30,7 +30,7 @@ import {removeAll} from '../../redux/actions/bookmarkActions'
       <h3>Loading...</h3>
     ) : error ? (
       <h3>{error}</h3>
-    ) : (
+    ) : bookmarks.length === 1 ? bookmarks.map((bookmark, index) => <BookmarkArticle article={bookmark} key={index} /> )  :  (
       bookmarks
         .slice(pagesVisited, pagesVisited + bookmarksPerPage)
         .map((bookmark, index) => <BookmarkArticle article={bookmark} key={index} />)

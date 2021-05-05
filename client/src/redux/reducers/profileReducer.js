@@ -30,20 +30,20 @@ export const profileReducer = (state = {profile:[]}, action) => {
                 loading: false,
                 error: action.payload
             }
-            case profileTypes.UPDATE_PROFILE_REQUEST:
-                return {
-                    loading: true
-                }
-            case profileTypes.UPDATE_PROFILE_SUCCESS:
-                return {
-                    loading: false,
-                    profile: action.payload
-                }
-            case profileTypes.UPDATE_PROFILE_FAIL:
-                return {
-                    loading: false,
-                    error: action.payload
-                }
+        case profileTypes.UPDATE_PROFILE_REQUEST:
+            return {
+                loading: true
+            }
+        case profileTypes.UPDATE_PROFILE_SUCCESS:
+            return {
+                loading: false,
+                profile: action.payload
+            }
+        case profileTypes.UPDATE_PROFILE_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
         default:
             return state
     }
