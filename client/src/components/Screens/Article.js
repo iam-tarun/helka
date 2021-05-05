@@ -8,11 +8,10 @@ import {
   CardMedia,
   makeStyles,
   Typography,
-  IconButton,
 } from "@material-ui/core";
-import {Bookmark} from '@material-ui/icons'
 import React from "react";
 import { Link } from "react-router-dom";
+import {useSelector} from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -25,11 +24,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Article = ({ article }) => {
+const Article = ({ article }, clr) => {
   const classes = useStyles();
-  const handleBookmark = (e) => {
-    e.target.style.color="black"
-  }
+  const user = useSelector((state) => state.user)
+  article  = {...article, user: user._id}
   return (
     <Grid item xs={4}>
       <Card className={classes.card}>
@@ -50,9 +48,6 @@ const Article = ({ article }) => {
           </CardActionArea>
         </Link>
         <CardActions>
-          <IconButton style={{color:"white"}} onClick={handleBookmark} >
-            <Bookmark />
-          </IconButton>
           <a
             href={article.url}
             style={{ textDecoration: "None", color: "white" }}

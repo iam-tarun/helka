@@ -45,3 +45,28 @@ exports.getBookmarks = async (req, res, next) => {
         next(error)
     }
 }
+
+exports.removeBookmarks = async (req, res, next) => {
+   try {
+    const {id} = req.body
+    await Bookmark.findOneAndRemove({_id:id})
+
+    res.status(200).json({
+        success: true,
+    })
+   } catch (error) {
+      next(error) 
+   }
+}
+
+exports.removeAll = async (req, res, next) => {
+    try {
+        const user = req.user
+        await Bookmark.remove({user:user._id})
+        res.status(200).json({
+            success: true,
+        })
+    } catch (error) {
+        next(error)
+    }
+}

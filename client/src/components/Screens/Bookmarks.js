@@ -2,12 +2,14 @@ import {
     Grid,
     createMuiTheme,
     MuiThemeProvider,
+    Button,
   } from "@material-ui/core";
   import { Pagination } from "@material-ui/lab";
   import React from "react";
-  import { useSelector } from "react-redux";
-  import Article from "./Article";
-  
+  import { useSelector, useDispatch } from "react-redux";
+import BookmarkArticle from "./BookmarkArticle";
+import {removeAll} from '../../redux/actions/bookmarkActions'
+
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -23,6 +25,7 @@ import {
     const [pageNumber, setPageNumber] = React.useState(0);
     const bookmarksPerPage = 3;
     const pagesVisited = pageNumber * bookmarksPerPage;
+    const dispatch = useDispatch()
     const displayBookmarks = loading ? (
       <h3>Loading...</h3>
     ) : error ? (
@@ -30,17 +33,21 @@ import {
     ) : (
       bookmarks
         .slice(pagesVisited, pagesVisited + bookmarksPerPage)
-        .map((bookmark, index) => <Article article={bookmark} key={index} />)
+        .map((bookmark, index) => <BookmarkArticle article={bookmark} key={index} />)
     );
   
     const pageCount = Math.ceil(
-      loading ? 0 : bookmarks.length / bookmarksPerPage -1
+      loading ? 0 : error ? 0 : bookmarks.length / bookmarksPerPage -1
     );
   
     const changePage = (event, value) => {
       setPageNumber(value);
     };
-  
+    
+    const handleRemoveAll = () => {
+      dispatch(removeAll())
+    }
+
     return (
       <MuiThemeProvider theme={theme}>
         <Grid
@@ -57,6 +64,7 @@ import {
         >
           <Grid item xs={12}>
               Bookmarks
+              <Button onClick={handleRemoveAll} >Remove all</Button>
           </Grid>
           {displayBookmarks}
           <Grid item xs={12}>

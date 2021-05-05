@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
 import { changeHeadlines } from "../../redux/actions/headlinseActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Article from "./Article";
 
 const theme = createMuiTheme({
@@ -272,12 +272,12 @@ const countries = [
   },
 ];
 
-const Headlinesblock = ({ Headlines }) => {
+const Headlinesblock = () => {
 
   const [pageNumber, setPageNumber] = React.useState(1);
+  const Headlines = useSelector(state => state.headlines)
   const headlinesPerPage = 3;
   const pagesVisited = pageNumber * headlinesPerPage;
-
   const displayHeadlines = Headlines.loading ? (
     <Grid item xs={12}>
       {" "}
@@ -288,8 +288,7 @@ const Headlinesblock = ({ Headlines }) => {
   ) : (
     Headlines.headlines
       .slice(pagesVisited, pagesVisited + headlinesPerPage)
-      .map((headline, index) => (
-        <Article article={headline} key={index} />
+      .map((headline, index) => (  <Article article={headline}  key={index} clr="white" />
       ))
   );
 

@@ -2,7 +2,7 @@ import React from 'react'
 import * as material from '@material-ui/core'
 import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import {addBookmark} from '../../redux/actions/bookmarkActions'
+import {removeBookmark} from '../../redux/actions/bookmarkActions'
 
 const useStyles = material.makeStyles((theme) => ({
     root: {
@@ -10,13 +10,14 @@ const useStyles = material.makeStyles((theme) => ({
     }
 }))
 
-const Headline = () => {
+const Bookmark = () => {
     const history = useHistory()
     const headline = history.location.state
     const classes = useStyles()
     const dispatch = useDispatch()
-    const handleBookmarks = () => {
-        dispatch(addBookmark(headline))
+    const handleRemoveBookmark = () => {
+        dispatch(removeBookmark({id: headline._id}))
+        history.push("/dashboard/bookmarks")
     }
 
     return (
@@ -37,10 +38,11 @@ const Headline = () => {
                     <material.Grid item xs={4}><material.Typography>Author: {headline.author}</material.Typography></material.Grid>
                     <material.Grid item xs={4}><material.Typography>published At: {headline.publishedAt}</material.Typography></material.Grid>
                     <material.Grid item xs={4}><material.Link href={headline.url} target="_blank" >Source: {headline.source.name}</material.Link></material.Grid>
+                    
             </material.Grid>
-            <material.Grid item xs={12}><material.Button onClick={handleBookmarks} >add to Bookmarks</material.Button></material.Grid>
+            <material.Grid item xs={12}><material.Button onClick={handleRemoveBookmark} >remove Bookmark</material.Button></material.Grid>
         </material.Grid>
     )
 }
 
-export default Headline
+export default Bookmark

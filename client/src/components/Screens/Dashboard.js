@@ -15,6 +15,7 @@ import Channels from "./Channels";
 import Search from './Search';
 import './dashboard.css'
 import { getBookmarks } from "../../redux/actions/bookmarkActions";
+import Bookmark from "./Bookmark";
 
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const Dashboard = ({ history }) => {
           <Grid item xs={12}>
             <Switch>
               <Route path="/dashboard/bookmarks" exact component={Bookmarks} />
+              <Route path="/dashboard/bookmark" exact component={Bookmark} />
               <Route path="/dashboard/space" exact component={Space} />
               <Route path="/dashboard/headline" exact component={Headline} />
               <Route path="/dashboard/channels" exact component={Channels} />
