@@ -65,7 +65,7 @@ exports.search = async (req, res, next) => {
         const response = await newsapi.v2.everything({
             q,
             language: 'en',
-            page:2
+            page:1
         })
 
         return res.status(200).json({

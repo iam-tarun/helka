@@ -12,6 +12,7 @@ import React from "react";
 
 import Clock from "react-live-clock";
 import { NavLink } from "react-router-dom";
+import {useSelector} from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SideNav = ({ username }) => {
   const classes = useStyles();
-
+  const profile = useSelector(state => state.profile)
   return (
     <Paper className={classes.paper}>
       <Grid

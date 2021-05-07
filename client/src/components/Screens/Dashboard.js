@@ -8,7 +8,8 @@ import { getHeadlines } from "../../redux/actions/headlinseActions";
 import { getChannels } from "../../redux/actions/sourcesActions";
 import {getProfile} from '../../redux/actions/profileActions'
 import Headlinesblock from "./Headlinesblock";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import PrivateRoute from "../protectRoutes/PrivateRoute"
 import Bookmarks from "./Bookmarks";
 import Headline from "./Headline";
 import Channels from "./Channels";
@@ -60,15 +61,15 @@ const Dashboard = ({ history }) => {
           </Grid>
           <Grid item xs={12}>
             <Switch>
-              <Route path="/dashboard/bookmarks" exact component={Bookmarks} />
-              <Route path="/dashboard/bookmark" exact component={Bookmark} />
-              <Route path="/dashboard/profile" exact component={Profile} />
-              <Route path="/dashboard/headline" exact component={Headline} />
-              <Route path="/dashboard/channels" exact component={Channels} />
-              <Route path="/dashboard/search" exact component={Search} />
-              <Route path="/dashboard">
+              <PrivateRoute path="/dashboard/bookmarks" exact component={Bookmarks} />
+              <PrivateRoute path="/dashboard/bookmark" exact component={Bookmark} />
+              <PrivateRoute path="/dashboard/profile" exact component={Profile} />
+              <PrivateRoute path="/dashboard/headline" exact component={Headline} />
+              <PrivateRoute path="/dashboard/channels" exact component={Channels} />
+              <PrivateRoute path="/dashboard/search" exact component={Search} />
+              <PrivateRoute path="/dashboard">
                 <Headlinesblock Headlines={Headlines} />
-              </Route>
+              </PrivateRoute>
             </Switch>
           </Grid>
         </Grid>

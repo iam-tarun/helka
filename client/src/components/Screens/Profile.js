@@ -22,7 +22,7 @@ const Profile = () => {
     console.log(profile.error)
     const handleProfile = (e) => {
         e.preventDefault()
-        if(profile.profile){
+        if(profile.profile.image){
             if(phone === ""){
                 setPhone(profile.profile[0].phoneNumber)
             }
@@ -72,7 +72,7 @@ const Profile = () => {
                     </material.Grid>
                 </material.Grid>
                 <material.Grid item xs={6}>
-                    {profile.loading ? <h2>Loading...</h2> : profile.error ? profile.error : profile.profile.length === 0 ? <h2>Loading...</h2>  :  (
+                    {profile.loading ? <h2>Create Profile</h2> : profile.error ? profile.error : profile.profile.length === 0 ? <h2>Create Profile</h2>  :  (
                     <material.Grid container spacing={2} direction="column" alignItems="center" justify="center" style={{textAlign:"center"}}>
                         <material.CardMedia 
                             component="img"
